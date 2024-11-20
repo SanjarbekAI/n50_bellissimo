@@ -19,3 +19,14 @@ async def user_main_menu_keyboard():
     )
 
     return markup
+
+
+languages = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Uzbek"),
+            KeyboardButton(text="Russian"),
+            KeyboardButton(text="English"),
+        ]
+    ], resize_keyboard=True
+)

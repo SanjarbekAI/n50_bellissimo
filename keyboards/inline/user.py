@@ -24,3 +24,4 @@ async def test_callback_keyboard():
         ]
     )
     return markup
+

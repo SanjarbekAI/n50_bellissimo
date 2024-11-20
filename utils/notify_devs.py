@@ -1,6 +1,6 @@
-from loader import bot, logger
+from loader import bot
 from main.config import DEVS
-
+from logging_settings import logger
 
 async def send_notification_to_devs(dispatcher):
     try:
