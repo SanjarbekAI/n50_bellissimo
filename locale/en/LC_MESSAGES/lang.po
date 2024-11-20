@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-20 16:44+0500\n"
+"POT-Creation-Date: 2024-11-20 17:19+0500\n"
 "PO-Revision-Date: 2024-11-20 16:41+0500\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,23 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: handlers/users/start.py:19
+#: handlers/users/contact.py:6 keyboards/default/user.py:17
+msgid "Contact ☎️"
+msgstr ""
+
+#: handlers/users/contact.py:8
+msgid "📲 Call center: 1174 or (71) 203-66-66"
+msgstr ""
+
+#: handlers/users/start.py:21
 msgid "Welcome back my hero 😊"
 msgstr ""
 
-#: handlers/users/start.py:30
+#: handlers/users/start.py:33
 msgid "Sorry, you have to enter your full name"
 msgstr ""
 
-#: handlers/users/start.py:39
+#: handlers/users/start.py:44
 msgid "Please, enter your phone number by the button below 👇"
 msgstr ""
 
-#: handlers/users/start.py:50
+#: handlers/users/start.py:57
 msgid "You have successfully registered ✅"
 msgstr ""
 
-#: handlers/users/start.py:53
+#: handlers/users/start.py:60
 msgid "Sorry, please try again later 😔"
+msgstr ""
+
+#: keyboards/common.py:8
+msgid "Share phone number ☎️"
+msgstr ""
+
+#: keyboards/default/user.py:10
+msgid "Menu 🍕"
+msgstr ""
+
+#: keyboards/default/user.py:13
+msgid "My orders 📖"
+msgstr ""
+
+#: keyboards/default/user.py:14
+msgid "Our branches 🏚"
+msgstr ""
+
+#: keyboards/default/user.py:18
+msgid "Settings ⚙️"
 msgstr ""
 

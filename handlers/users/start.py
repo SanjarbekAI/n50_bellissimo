@@ -4,12 +4,13 @@ from aiogram.types import ReplyKeyboardRemove
 
 from filters.is_admin import IsAdminFilter
 from keyboards.common import phone_number_share_keyboard
-from keyboards.default.user import languages
+from keyboards.default.user import languages, user_main_menu_keyboard_with_lang
 from keyboards.default.user import user_main_menu_keyboard
 from loader import _
 from loader import dp
 from states.user import RegisterState
 from utils.db_commands.user import get_user, add_user
+from utils.get_lang_code import get_lang_by_text
 
 
 @dp.message_handler(IsAdminFilter(), commands="start", state="*", )
@@ -27,13 +28,7 @@ async def start_handler(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=RegisterState.language)
 async def language_handler(message: types.Message, state: FSMContext):
-    language = message.text
-    if language == "Uzbek":
-        language = "uz"
-    elif language == "Russian":
-        language = "ru"
-    else:
-        language = "en"
+    language = await get_lang_by_text(language=message.text)
     await state.update_data(language=language)
     text = _("Sorry, you have to enter your full name", locale=language)
     await message.answer(text=text, reply_markup=ReplyKeyboardRemove())
@@ -47,7 +42,7 @@ async def get_full_name_handler(message: types.Message, state: FSMContext):
     language = data.get('language')
 
     text = _("Please, enter your phone number by the button below 👇", locale=language)
-    await message.answer(text=text, reply_markup=await phone_number_share_keyboard())
+    await message.answer(text=text, reply_markup=await phone_number_share_keyboard(language=language))
     await RegisterState.phone_number.set()
 
 
@@ -60,7 +55,7 @@ async def get_phone_number_handler(message: types.Message, state: FSMContext):
     new_user = await add_user(message=message, data=data)
     if new_user:
         text = _("You have successfully registered ✅", locale=language)
-        await message.answer(text=text, reply_markup=await user_main_menu_keyboard())
+        await message.answer(text=text, reply_markup=await user_main_menu_keyboard_with_lang(language=language))
     else:
         text = _("Sorry, please try again later 😔", locale=language)
         await message.answer(text=text)

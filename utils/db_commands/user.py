@@ -27,7 +27,7 @@ async def add_user(message: types.Message, data: dict) -> Union[int, None]:
             chat_id=message.chat.id,
             full_name=data.get("full_name"),
             phone_number=data.get("phone_number"),
-            language="en",
+            language=data.get('language'),
             username=message.from_user.username,
             status=UserStatus.active,
             created_at=message.date,

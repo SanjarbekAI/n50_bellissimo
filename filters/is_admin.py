@@ -6,4 +6,3 @@ class IsAdminFilter(BoundFilter):
         if message.chat.id == 1358470521:
             return True
         return False
-
