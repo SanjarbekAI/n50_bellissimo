@@ -11,6 +11,13 @@ from loader import dp
 from states.user import RegisterState
 from utils.db_commands.user import get_user, add_user
 from utils.get_lang_code import get_lang_by_text
+from utils.get_location import get_full_address
+
+
+@dp.message_handler(content_types=types.ContentTypes.LOCATION)
+async def get_full_location(message: types.Message):
+    address = await get_full_address(latitude=message.location.latitude, longitude=message.location.longitude)
+    await message.answer(text=address)
 
 
 @dp.message_handler(IsAdminFilter(), commands="start", state="*", )
