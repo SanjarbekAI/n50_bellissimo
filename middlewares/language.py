@@ -12,6 +12,7 @@ async def get_lang(user_id):
     else:
         return "en"
 
+
 class ACLMiddleware(I18nMiddleware):
     async def get_user_locale(self, action, args):
         user = types.User.get_current()
