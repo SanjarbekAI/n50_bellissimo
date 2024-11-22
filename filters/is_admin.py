@@ -1,8 +1,7 @@
-from aiogram.dispatcher.filters import BoundFilter
+from aiogram import types
+from aiogram.filters import Filter
 
 
-class IsAdminFilter(BoundFilter):
-    async def check(self, message, *args) -> bool:
-        if message.chat.id == 1358470521:
-            return True
-        return False
+class IsAdminFilter(Filter):
+    async def __call__(self, message: types.Message):
+        return message.from_user.id == 1358470521
