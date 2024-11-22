@@ -23,7 +23,7 @@ async def get_full_location(message: types.Message):
     await message.answer(text=address)
 
 
-@router.message(IsAdminFilter(), Command("start"))
+@router.message(Command("start"))
 async def start_handler(message: types.Message, state: FSMContext):
     await state.clear()
     user = await get_user(chat_id=message.chat.id)
