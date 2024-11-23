@@ -9,7 +9,7 @@ from middlewares.subscribe import SubscribeMiddleware
 from utils.notify_devs import send_notification_to_devs
 from utils.set_bot_commands import set_default_commands
 
-
+# test
 async def main():
     dp.include_router(router=start.router)
     dp.include_router(router=contact.router)
