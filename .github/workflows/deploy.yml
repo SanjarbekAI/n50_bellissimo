@@ -34,34 +34,31 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up SSH Agent
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Deploy to DigitalOcean
-        run: |
+    - name: Deploy to DigitalOcean
+      uses: appleboy/ssh-action@v0.1.11
+      with:
+        host: 138.197.184.77
+        username: root
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
           # Ensure the network exists
           docker network inspect telegram_network >/dev/null 2>&1 || docker network create telegram_network
-          
-          # Pull the latest image from Docker Hub
-          docker pull "${{ secrets.DOCKER_USERNAME }}/telegram-bot:latest"
-          
+  
+          # Pull the latest image
+          docker pull ${{ secrets.DOCKER_USERNAME }}/telegram-bot:latest
+  
           # Stop and remove old container if exists
           docker ps -q --filter "name=telegram_bot" | grep -q . && docker stop telegram_bot && docker rm telegram_bot
-          
+  
           # Run the new container
           docker run -d --name telegram_bot \
             --env-file /root/n50_bellissimo/.env \
             --network=telegram_network \
             --restart=always \
-            "${{ secrets.DOCKER_USERNAME }}/telegram-bot:latest" \
+            ${{ secrets.DOCKER_USERNAME }}/telegram-bot:latest \
             sh -c "alembic upgrade head && pybabel compile -d locale -D lang && python app.py"
-          
+  
           # Optional: Display logs for debugging
           sleep 5
           docker logs telegram_bot
-
